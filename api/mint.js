@@ -81,14 +81,17 @@ const handler = async (req, res) => {
       console.log("option",options)
       const tx = await contract.mintToken(customer_eth, "ipfs://" + metadata_hash, options)
       console.log("tx", tx)
-      let txRes = await tx.wait()
-      if (txRes.transactionHash) {
-        let totalSupply = await contract.totalSupply();
-        res.json({ 
-          tokenId: parseInt(totalSupply),
-          status: "minted" 
-        })
-      }
+      res.json({
+        status: "success"
+      })
+      // let txRes = await tx.wait()
+      // if (txRes.transactionHash) {
+      //   let totalSupply = await contract.totalSupply();
+      //   res.json({ 
+      //     tokenId: parseInt(totalSupply),
+      //     status: "minted" 
+      //   })
+      // }
   } catch (err) {
     res.json({
       status: "failed"
